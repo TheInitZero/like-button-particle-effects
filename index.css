@@ -1,0 +1,102 @@
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+}
+
+@layer base {
+  :root {
+    --color-bg-dark: hsl(0 0 4);
+    --color-bg: hsl(0 0 8);
+    --color-bg-light: hsl(0 0 12);
+
+    --color-border: hsl(0 0 36);
+    --color-border-muted: hsl(0 0 24);
+
+    --color-red: hsl(0 95 50);
+  }
+
+  body {
+    background-color: var(--color-bg-dark);
+  }
+}
+
+@layer component {
+  .like-button {
+    cursor: pointer;
+    position: relative;
+    display: grid;
+    place-content: center;
+    padding: 1rem;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background-color: var(--color-bg);
+    transition: background-color 400ms;
+  }
+
+  .like-button--liked {
+    background-color: var(--color-border);
+    transition-duration: 200ms;
+  }
+
+  .like-button__icon {
+    stroke: var(--color-border);
+    fill: var(--color-bg);
+    transition:
+      stroke 400ms,
+      fill 400ms;
+  }
+
+  .like-button:hover .like-button__icon {
+    stroke: var(--color-red);
+    transition-duration: 200ms;
+  }
+
+  .like-button--liked .like-button__icon {
+    stroke: var(--color-red);
+    fill: var(--color-red);
+  }
+
+  .particle {
+    --move-duration: 1000ms;
+    --fade-duration: 1500ms;
+
+    position: absolute;
+    inset: 0px;
+    margin: auto;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 50%;
+    background-color: white;
+    animation:
+      move var(--move-duration) forwards,
+      fadeToTransparent var(--fade-duration) forwards;
+  }
+
+  @keyframes move {
+    to {
+      transform: translate(var(--x, 48px), var(--y, 48px));
+    }
+  }
+}
+
+@layer utility {
+  .container {
+    margin-inline: auto;
+    max-inline-size: 40rem;
+    padding: 1rem;
+    min-block-size: 100dvh;
+    display: grid;
+    place-content: center;
+  }
+
+  @keyframes fadeToTransparent {
+    to {
+      opacity: 0;
+    }
+  }
+}
