@@ -1,7 +1,7 @@
 import { random } from "https://cdn.skypack.dev/lodash";
 
-const MOVE_DURATION = 500;
-const FADE_DURATION = 1000;
+const MOVE_DURATION = 300;
+const FADE_DURATION = 900;
 const MAX_DISPLACEMENT = 48;
 
 /** @type {HTMLButtonElement} */

@@ -56,8 +56,8 @@
   }
 
   .particle {
-    --move-duration: 1000ms;
-    --fade-duration: 1500ms;
+    --move-duration: 300ms;
+    --fade-duration: 900ms;
 
     position: absolute;
     inset: 0px;
