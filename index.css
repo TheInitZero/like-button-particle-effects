@@ -24,35 +24,40 @@
     border-radius: 50%;
     border: 2px solid hsl(0 0 48);
     background-color: hsl(0 0 4);
-    transition: background-color 400ms;
+    transition: background-color 450ms;
   }
 
   .like-button--liked {
     background-color: hsl(0 0 24);
-    transition-duration: 200ms;
+    transition-duration: 150ms;
   }
 
   .like-button__icon {
+    --stroke-transition-duration: 450ms;
+    --fill-transition-duration: 450ms;
+
     stroke: hsl(0 0 48);
     fill: hsl(0 0 4);
     transition:
-      stroke 400ms,
-      fill 400ms;
+      stroke var(--stroke-transition-duration),
+      fill var(--fill-transition-duration);
   }
 
   .like-button:hover .like-button__icon {
     stroke: hsl(0 95 50);
-    transition-duration: 200ms;
+    --stroke-transition-duration: 150ms;
   }
 
   .like-button--liked .like-button__icon {
     stroke: hsl(0 95 75);
     fill: hsl(0 95 50);
+    --stroke-transition-duration: 150ms;
+    --fill-transition-duration: 150ms;
   }
 
   .particle {
-    --move-duration: 1000ms;
-    --fade-duration: 1500ms;
+    --move-duration: 300ms;
+    --fade-duration: 900ms;
 
     position: absolute;
     inset: 0px;
