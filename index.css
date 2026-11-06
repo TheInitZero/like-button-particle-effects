@@ -56,7 +56,7 @@
   }
 
   .particle {
-    --move-duration: 300ms;
+    --disperse-duration: 300ms;
     --fade-duration: 900ms;
 
     position: absolute;
@@ -67,11 +67,11 @@
     border-radius: 50%;
     background-color: white;
     animation:
-      move var(--move-duration) forwards,
+      disperse var(--disperse-duration) forwards,
       fadeToTransparent var(--fade-duration) forwards;
   }
 
-  @keyframes move {
+  @keyframes disperse {
     to {
       transform: translate(var(--x, 48px), var(--y, 48px));
     }
