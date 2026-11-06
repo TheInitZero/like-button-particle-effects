@@ -22,19 +22,19 @@
     place-content: center;
     padding: 1rem;
     border-radius: 50%;
-    border: 2px solid hsl(0 0 36);
-    background-color: hsl(0 0 8);
+    border: 2px solid hsl(0 0 48);
+    background-color: hsl(0 0 4);
     transition: background-color 400ms;
   }
 
   .like-button--liked {
-    background-color: hsl(0 0 36);
+    background-color: hsl(0 0 24);
     transition-duration: 200ms;
   }
 
   .like-button__icon {
-    stroke: hsl(0 0 36);
-    fill: hsl(0 0 8);
+    stroke: hsl(0 0 48);
+    fill: hsl(0 0 4);
     transition:
       stroke 400ms,
       fill 400ms;
@@ -46,7 +46,7 @@
   }
 
   .like-button--liked .like-button__icon {
-    stroke: hsl(0 95 50);
+    stroke: hsl(0 95 75);
     fill: hsl(0 95 50);
   }
 
