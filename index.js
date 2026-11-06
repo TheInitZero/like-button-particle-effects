@@ -1,6 +1,6 @@
 import { random } from "https://cdn.skypack.dev/lodash";
 
-const MOVE_DURATION = 300;
+const DISPERSE_DURATION = 300;
 const FADE_DURATION = 900;
 const MAX_DISPLACEMENT = 48;
 
@@ -27,7 +27,10 @@ $likeButton.addEventListener("click", function () {
     $particle.style.setProperty("--x", x + "px");
     $particle.style.setProperty("--y", y + "px");
 
-    $particle.style.setProperty("--move-duration", MOVE_DURATION + "ms");
+    $particle.style.setProperty(
+      "--disperse-duration",
+      DISPERSE_DURATION + "ms",
+    );
     $particle.style.setProperty("--fade-duration", FADE_DURATION + "ms");
 
     $particles.push($particle);
