@@ -4,6 +4,8 @@ const DISPERSE_DURATION = 300;
 const FADE_DURATION = 900;
 const MIN_DISPLACEMENT = 32;
 const MAX_DISPLACEMENT = 64;
+const NUM_PARTICLES = 20;
+const JITTER = 10;
 
 /** @type {HTMLButtonElement} */
 const $likeButton = document.getElementById("likeButton");
@@ -18,11 +20,11 @@ $likeButton.addEventListener("click", function () {
   /** @type {Array<HTMLSpanElement>} */
   const $particles = [];
 
-  for (let i = 0; i < 20; i++) {
+  for (let index = 0; index < NUM_PARTICLES; index += 1) {
     const $particle = document.createElement("span");
     $particle.classList.add("particle");
 
-    const angle = random(0, 360);
+    const angle = (360 / NUM_PARTICLES) * index + random(-JITTER, JITTER);
     const distance = random(MIN_DISPLACEMENT, MAX_DISPLACEMENT);
     const [x, y] = convertPolarToCartesian(angle, distance);
 
