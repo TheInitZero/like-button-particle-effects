@@ -24,7 +24,14 @@ $likeButton.addEventListener("click", function () {
     const $particle = document.createElement("span");
     $particle.classList.add("particle");
 
-    const angle = (360 / NUM_PARTICLES) * index + random(-JITTER, JITTER);
+    const angle = normalize({
+      value: index,
+      currentScaleMin: 0,
+      currentScaleMax: NUM_PARTICLES,
+      newScaleMin: 0,
+      newScaleMax: 360,
+    }) + random(-JITTER, JITTER);
+
     const distance = random(MIN_DISPLACEMENT, MAX_DISPLACEMENT);
     const [x, y] = convertPolarToCartesian(angle, distance);
 
@@ -45,6 +52,35 @@ $likeButton.addEventListener("click", function () {
     $particles.forEach(($p) => $p.remove());
   }, FADE_DURATION + 100);
 });
+
+/**
+ * @typedef {Object} NormalizeParams
+ * @property {number} value
+ * @property {number} currentScaleMin
+ * @property {number} currentScaleMax
+ * @property {number} newScaleMin
+ * @property {number} newScaleMax
+ */
+
+/**
+ * @param {NormalizeParams} params
+ * @returns {number} Interpolated value
+ */
+function normalize({
+  value,
+  currentScaleMin,
+  currentScaleMax,
+  newScaleMin = 0,
+  newScaleMax = 1,
+}) {
+  const standardNormalization = (
+    (value - currentScaleMin) / (currentScaleMax - currentScaleMin)
+  );
+
+  return (
+    (newScaleMax - newScaleMin) * standardNormalization + newScaleMin
+  );
+}
 
 /**
  * @param {number} angle
