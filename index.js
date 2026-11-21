@@ -2,8 +2,7 @@ import { random } from "https://cdn.skypack.dev/lodash";
 
 const DISPERSE_DURATION = 300;
 const FADE_DURATION = 900;
-const MIN_DISPLACEMENT = 32;
-const MAX_DISPLACEMENT = 64;
+const DISTANCE = { min: 32, max: 64 };
 const NUM_PARTICLES = 20;
 const JITTER = 10;
 
@@ -32,7 +31,7 @@ $likeButton.addEventListener("click", function () {
       newScaleMax: 360,
     }) + random(-JITTER, JITTER);
 
-    const distance = random(MIN_DISPLACEMENT, MAX_DISPLACEMENT);
+    const distance = random(DISTANCE.min, DISTANCE.max);
     const [x, y] = convertPolarToCartesian(angle, distance);
 
     $particle.style.setProperty("--x", x + "px");
