@@ -4,6 +4,7 @@ const DISPERSE_DURATION = { min: 400, max: 800 };
 const FADE_DURATION = { min: 1000 - 500, max: 1000 + 500 };
 const FADE_DELAY = { min: 0, max: 500 };
 const DISTANCE = { min: 32, max: 64 };
+const PARTICLE_SIZE = { min: 8, max: 16 };
 const NUM_PARTICLES = 20;
 const JITTER = 10;
 
@@ -34,6 +35,7 @@ $likeButton.addEventListener("click", function () {
 
     const distance = random(DISTANCE.min, DISTANCE.max);
     const [x, y] = convertPolarToCartesian(angle, distance);
+    const particleSize = random(PARTICLE_SIZE.min, PARTICLE_SIZE.max);
 
     const disperseDuration = normalize({
       value: distance,
@@ -55,6 +57,7 @@ $likeButton.addEventListener("click", function () {
 
     $particle.style.setProperty("--x", x + "px");
     $particle.style.setProperty("--y", y + "px");
+    $particle.style.setProperty("--particle-size", particleSize + "px");
 
     $particle.style.setProperty(
       "--disperse-duration",

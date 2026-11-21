@@ -63,8 +63,8 @@
     position: absolute;
     inset: 0px;
     margin: auto;
-    height: 0.75rem;
-    width: 0.75rem;
+    height: var(--particle-size, 8px);
+    width: var(--particle-size, 8px);
     border-radius: 50%;
     background-color: white;
     animation:
