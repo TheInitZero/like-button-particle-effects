@@ -3,6 +3,7 @@ import { random } from "https://cdn.skypack.dev/lodash";
 const DISPERSE_DURATION = { min: 400, max: 800 };
 const FADE_DURATION = { min: 1000 - 500, max: 1000 + 500 };
 const FADE_DELAY = { min: 0, max: 500 };
+const TWINKLE_DURATION = { min: 150, max: 300 };
 const DISTANCE = { min: 32, max: 64 };
 const PARTICLE_SIZE = { min: 8, max: 16 };
 const NUM_PARTICLES = 20;
@@ -55,6 +56,9 @@ $likeButton.addEventListener("click", function () {
 
     const fadeDelay = random(FADE_DELAY.min, FADE_DELAY.max);
 
+    const twinkleFromOpacity = random(0.25, 1, true);
+    const twinkleDuration = random(TWINKLE_DURATION.min, TWINKLE_DURATION.max);
+
     $particle.style.setProperty("--x", x + "px");
     $particle.style.setProperty("--y", y + "px");
     $particle.style.setProperty("--particle-size", particleSize + "px");
@@ -65,12 +69,14 @@ $likeButton.addEventListener("click", function () {
     );
     $particle.style.setProperty("--fade-duration", fadeDuration + "ms");
     $particle.style.setProperty('--fade-delay', fadeDelay + "ms");
+    $particle.style.setProperty("--twinkle-from-opacity", twinkleFromOpacity);
+    $particle.style.setProperty("--twinkle-duration", twinkleDuration + "ms");
 
     $particles.push($particle);
     $likeButton.append($particle);
   }
 
-  const cleanupDelay = DISPERSE_DURATION.max + FADE_DURATION.max + FADE_DELAY.max + 100;
+  const cleanupDelay = DISPERSE_DURATION.max + TWINKLE_DURATION.max + FADE_DURATION.max + FADE_DELAY.max + 100;
   
   setTimeout(function () {
     $particles.forEach(($p) => $p.remove());

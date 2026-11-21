@@ -56,9 +56,10 @@
   }
 
   .particle {
-    --disperse-duration: 300ms;
+    --twinkle-duration: 150ms;
     --fade-duration: 900ms;
     --fade-delay: 500ms;
+    --disperse-duration: 300ms;
 
     position: absolute;
     inset: 0px;
@@ -68,13 +69,23 @@
     border-radius: 50%;
     background-color: white;
     animation:
-      disperse var(--disperse-duration) forwards,
-      fadeToTransparent var(--fade-duration) var(--fade-delay) forwards;
+      twinkle var(--twinkle-duration) ease-in-out infinite alternate both,
+      fadeToTransparent var(--fade-duration) var(--fade-delay) forwards,
+      disperse var(--disperse-duration) forwards;
   }
 
   @keyframes disperse {
     to {
       transform: translate(var(--x, 48px), var(--y, 48px));
+    }
+  }
+
+  @keyframes twinkle {
+    from {
+      opacity: var(--twinkle-from-opacity, 0.25);
+    }
+    to {
+      opacity: 1;
     }
   }
 }
