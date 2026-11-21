@@ -1,7 +1,7 @@
 import { random } from "https://cdn.skypack.dev/lodash";
 
 const DISPERSE_DURATION = { min: 400, max: 800 };
-const FADE_DURATION = 900;
+const FADE_DURATION = { min: 1000 - 500, max: 1000 + 500 };
 const FADE_DELAY = 500;
 const DISTANCE = { min: 32, max: 64 };
 const NUM_PARTICLES = 20;
@@ -43,6 +43,14 @@ $likeButton.addEventListener("click", function () {
       newScaleMax: DISPERSE_DURATION.max,
     });
 
+    const fadeDuration = normalize({
+      value: distance,
+      currentScaleMin: DISTANCE.min,
+      currentScaleMax: DISTANCE.max,
+      newScaleMin: FADE_DURATION.min,
+      newScaleMax: FADE_DURATION.max,
+    });
+
     $particle.style.setProperty("--x", x + "px");
     $particle.style.setProperty("--y", y + "px");
 
@@ -50,7 +58,7 @@ $likeButton.addEventListener("click", function () {
       "--disperse-duration",
       disperseDuration + "ms",
     );
-    $particle.style.setProperty("--fade-duration", FADE_DURATION + "ms");
+    $particle.style.setProperty("--fade-duration", fadeDuration + "ms");
     $particle.style.setProperty('--fade-delay', FADE_DELAY + 'ms');
 
     $particles.push($particle);
