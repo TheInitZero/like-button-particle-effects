@@ -65,9 +65,11 @@ $likeButton.addEventListener("click", function () {
     $likeButton.append($particle);
   }
 
+  const cleanupDelay = DISPERSE_DURATION.max + FADE_DURATION.max + FADE_DELAY + 100;
+  
   setTimeout(function () {
     $particles.forEach(($p) => $p.remove());
-  }, FADE_DURATION + 100);
+  }, cleanupDelay);
 });
 
 /**
