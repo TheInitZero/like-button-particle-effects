@@ -2,7 +2,7 @@ import { random } from "https://cdn.skypack.dev/lodash";
 
 const DISPERSE_DURATION = { min: 400, max: 800 };
 const FADE_DURATION = { min: 1000 - 500, max: 1000 + 500 };
-const FADE_DELAY = 500;
+const FADE_DELAY = { min: 0, max: 500 };
 const DISTANCE = { min: 32, max: 64 };
 const NUM_PARTICLES = 20;
 const JITTER = 10;
@@ -51,6 +51,8 @@ $likeButton.addEventListener("click", function () {
       newScaleMax: FADE_DURATION.max,
     });
 
+    const fadeDelay = random(FADE_DELAY.min, FADE_DELAY.max);
+
     $particle.style.setProperty("--x", x + "px");
     $particle.style.setProperty("--y", y + "px");
 
@@ -59,13 +61,13 @@ $likeButton.addEventListener("click", function () {
       disperseDuration + "ms",
     );
     $particle.style.setProperty("--fade-duration", fadeDuration + "ms");
-    $particle.style.setProperty('--fade-delay', FADE_DELAY + 'ms');
+    $particle.style.setProperty('--fade-delay', fadeDelay + "ms");
 
     $particles.push($particle);
     $likeButton.append($particle);
   }
 
-  const cleanupDelay = DISPERSE_DURATION.max + FADE_DURATION.max + FADE_DELAY + 100;
+  const cleanupDelay = DISPERSE_DURATION.max + FADE_DURATION.max + FADE_DELAY.max + 100;
   
   setTimeout(function () {
     $particles.forEach(($p) => $p.remove());
