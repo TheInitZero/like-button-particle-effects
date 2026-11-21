@@ -71,7 +71,7 @@
     animation:
       twinkle var(--twinkle-duration) ease-in-out infinite alternate both,
       fadeToTransparent var(--fade-duration) var(--fade-delay) forwards,
-      disperse var(--disperse-duration) forwards;
+      disperse var(--disperse-duration) forwards cubic-bezier(0.2, 0.56, 0, 1);
   }
 
   @keyframes disperse {
