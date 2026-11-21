@@ -58,6 +58,7 @@
   .particle {
     --disperse-duration: 300ms;
     --fade-duration: 900ms;
+    --fade-delay: 500ms;
 
     position: absolute;
     inset: 0px;
@@ -68,7 +69,7 @@
     background-color: white;
     animation:
       disperse var(--disperse-duration) forwards,
-      fadeToTransparent var(--fade-duration) forwards;
+      fadeToTransparent var(--fade-duration) var(--fade-delay) forwards;
   }
 
   @keyframes disperse {
