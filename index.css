@@ -117,6 +117,7 @@
   @keyframes disperse {
     to {
       transform:
+        scale(var(--scale, 2))
         translate(var(--x, 48px), var(--y, 48px))
         rotate(var(--spin, 400deg));
     }

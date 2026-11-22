@@ -68,6 +68,14 @@ $likeButton.addEventListener("click", function () {
       newScaleMax: 800,
     });
 
+    const scale = normalize({
+      value: distance,
+      currentScaleMin: DISTANCE.min,
+      currentScaleMax: DISTANCE.max,
+      newScaleMin: 1,
+      newScaleMax: 2,
+    });
+
     const particleDimensions = {
       height: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
       width: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
@@ -117,6 +125,10 @@ $likeButton.addEventListener("click", function () {
     $particle
       .style
       .setProperty("--spin", `${spin}deg`);
+
+    $particle
+      .style
+      .setProperty("--scale", scale);
 
     $particle
       .style
