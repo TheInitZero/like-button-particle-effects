@@ -60,6 +60,14 @@ $likeButton.addEventListener("click", function () {
 
     const [x, y] = convertPolarToCartesian(angle, distance);
 
+    const spin = normalize({
+      value: distance,
+      currentScaleMin: DISTANCE.min,
+      currentScaleMax: DISTANCE.max,
+      newScaleMin: 400,
+      newScaleMax: 800,
+    });
+
     const particleDimensions = {
       height: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
       width: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
@@ -105,6 +113,10 @@ $likeButton.addEventListener("click", function () {
     $particle
       .style
       .setProperty("--y", `${y}px`);
+
+    $particle
+      .style
+      .setProperty("--spin", `${spin}deg`);
 
     $particle
       .style
