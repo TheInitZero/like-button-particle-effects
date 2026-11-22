@@ -106,7 +106,7 @@
     
     border-radius: 50%;
     
-    background-color: white;
+    background-color: var(--particle-color, white);
     
     animation:
       var(--animation-twinkle),

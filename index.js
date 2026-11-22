@@ -62,6 +62,16 @@ $likeButton.addEventListener("click", function () {
 
     const particleSize = random(PARTICLE_SIZE.min, PARTICLE_SIZE.max);
 
+    const particleColorHsl = {
+      h: random(0, 360),
+      s: random(50, 100),
+      l: random(50, 90),
+
+      toString() {
+        return `hsl(${this.h} ${this.s} ${this.l})`;
+      }
+    };
+
     const disperseDuration = normalize({
       value: distance,
       currentScaleMin: DISTANCE.min,
@@ -95,6 +105,10 @@ $likeButton.addEventListener("click", function () {
     $particle
       .style
       .setProperty("--particle-size", `${particleSize}px`);
+
+    $particle
+      .style
+      .setProperty("--particle-color", particleColorHsl);
 
     $particle
       .style
