@@ -14,7 +14,7 @@ const DISTANCE = { min: 40, max: 80 };
 
 const PARTICLE_SIZE = { min: 8, max: 16 };
 
-const NUM_PARTICLES = 20;
+const NUM_PARTICLES = 25;
 
 const JITTER = 10;
 
