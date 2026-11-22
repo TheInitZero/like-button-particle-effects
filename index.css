@@ -100,11 +100,11 @@
     
     margin: auto;
     
-    height: var(--particle-size, 8px);
+    height: var(--particle-height, 8px);
     
-    width: var(--particle-size, 8px);
+    width: var(--particle-width, 8px);
     
-    border-radius: 50%;
+    border-radius: var(--particle-border-radius, 50%);
     
     background-color: var(--particle-color, white);
     

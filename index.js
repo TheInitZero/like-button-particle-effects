@@ -60,7 +60,11 @@ $likeButton.addEventListener("click", function () {
 
     const [x, y] = convertPolarToCartesian(angle, distance);
 
-    const particleSize = random(PARTICLE_SIZE.min, PARTICLE_SIZE.max);
+    const particleDimensions = {
+      height: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
+      width: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
+      borderRadius: random(5, 25),
+    };
 
     const particleColorHsl = {
       h: random(0, 360),
@@ -104,7 +108,15 @@ $likeButton.addEventListener("click", function () {
 
     $particle
       .style
-      .setProperty("--particle-size", `${particleSize}px`);
+      .setProperty("--particle-height", `${particleDimensions.height}px`);
+
+    $particle
+      .style
+      .setProperty("--particle-width", `${particleDimensions.width}px`);
+
+    $particle
+      .style
+      .setProperty("--particle-border-radius", `${particleDimensions.borderRadius}%`);
 
     $particle
       .style
