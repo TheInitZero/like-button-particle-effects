@@ -10,7 +10,7 @@ const FADE_DELAY = { min: 0, max: 500 };
 
 const TWINKLE_DURATION = { min: 150, max: 300 };
 
-const DISTANCE = { min: 32, max: 64 };
+const DISTANCE = { min: 40, max: 80 };
 
 const PARTICLE_SIZE = { min: 8, max: 16 };
 
