@@ -3,7 +3,9 @@
   *::before,
   *::after {
     padding: 0;
+
     margin: 0;
+
     box-sizing: border-box;
   }
 }
@@ -17,27 +19,39 @@
 @layer component {
   .like-button {
     cursor: pointer;
+
     position: relative;
+
     display: grid;
+    
     place-content: center;
+    
     padding: 1rem;
+    
     border-radius: 50%;
+    
     border: 2px solid hsl(0 0 48);
+    
     background-color: hsl(0 0 4);
+    
     transition: background-color 450ms;
   }
 
   .like-button--liked {
     background-color: hsl(0 0 24);
+    
     transition-duration: 150ms;
   }
 
   .like-button__icon {
     --stroke-transition-duration: 450ms;
+    
     --fill-transition-duration: 450ms;
 
     stroke: hsl(0 0 48);
+    
     fill: hsl(0 0 4);
+    
     transition:
       stroke var(--stroke-transition-duration),
       fill var(--fill-transition-duration);
@@ -45,35 +59,76 @@
 
   .like-button:hover .like-button__icon {
     stroke: hsl(0 95 50);
+    
     --stroke-transition-duration: 150ms;
   }
 
   .like-button--liked .like-button__icon {
     stroke: hsl(0 95 75);
+    
     fill: hsl(0 95 50);
+    
     --stroke-transition-duration: 150ms;
+    
     --fill-transition-duration: 150ms;
   }
 
   .particle {
-    --disperse-duration: 300ms;
-    --fade-duration: 900ms;
+    --animation-twinkle:
+      twinkle
+      var(--twinkle-duration, 150ms)
+      ease-in-out
+      infinite
+      alternate
+      both;
+
+    --animation-fade:
+      fadeToTransparent
+      var(--fade-duration, 900ms)
+      var(--fade-delay, 500ms)
+      forwards;
+
+    --animation-disperse:
+      disperse
+      var(--disperse-duration, 300ms)
+      forwards
+      cubic-bezier(0.2, 0.56, 0, 1);
 
     position: absolute;
+    
     inset: 0px;
+    
     margin: auto;
-    height: 0.75rem;
-    width: 0.75rem;
-    border-radius: 50%;
-    background-color: white;
+    
+    height: var(--particle-height, 8px);
+    
+    width: var(--particle-width, 8px);
+    
+    border-radius: var(--particle-border-radius, 50%);
+    
+    background-color: var(--particle-color, white);
+    
     animation:
-      disperse var(--disperse-duration) forwards,
-      fadeToTransparent var(--fade-duration) forwards;
+      var(--animation-twinkle),
+      var(--animation-fade),
+      var(--animation-disperse);
   }
 
   @keyframes disperse {
     to {
-      transform: translate(var(--x, 48px), var(--y, 48px));
+      transform:
+        scale(var(--scale, 2))
+        translate(var(--x, 48px), var(--y, 48px))
+        rotate(var(--spin, 400deg));
+    }
+  }
+
+  @keyframes twinkle {
+    from {
+      opacity: var(--twinkle-from-opacity, 0.25);
+    }
+    to {
+      opacity: 1;
     }
   }
 }
@@ -81,10 +136,15 @@
 @layer utility {
   .container {
     margin-inline: auto;
+    
     max-inline-size: 40rem;
+    
     padding: 1rem;
+    
     min-block-size: 100dvh;
+    
     display: grid;
+    
     place-content: center;
   }
 
