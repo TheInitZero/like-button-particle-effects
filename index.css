@@ -74,13 +74,13 @@
   }
 
   .particle {
-    --animation-twinkle: twinkle var(--twinkle-duration, 150ms) ease-in-out
-      infinite alternate both;
+    --animation-twinkle: twinkle var(--twinkle-duration) ease-in-out infinite
+      alternate both;
 
-    --animation-fade: fadeToTransparent var(--fade-duration, 900ms)
-      var(--fade-delay, 500ms) forwards;
+    --animation-fade: fadeToTransparent var(--fade-duration) var(--fade-delay)
+      forwards;
 
-    --animation-disperse: disperse var(--disperse-duration, 300ms) forwards
+    --animation-disperse: disperse var(--disperse-duration) forwards
       cubic-bezier(0.2, 0.56, 0, 1);
 
     position: absolute;
@@ -89,13 +89,13 @@
 
     margin: auto;
 
-    height: var(--particle-height, 8px);
+    height: var(--particle-height);
 
-    width: var(--particle-width, 8px);
+    width: var(--particle-width);
 
-    border-radius: var(--particle-border-radius, 50%);
+    border-radius: var(--particle-border-radius);
 
-    background-color: var(--particle-color, white);
+    background-color: var(--particle-color);
 
     animation:
       var(--animation-twinkle), var(--animation-fade), var(--animation-disperse);
@@ -103,14 +103,14 @@
 
   @keyframes disperse {
     to {
-      transform: scale(var(--scale, 2))
-        translate(var(--x, 48px), var(--y, 48px)) rotate(var(--spin, 400deg));
+      transform: scale(var(--scale)) translate(var(--x), var(--y))
+        rotate(var(--spin));
     }
   }
 
   @keyframes twinkle {
     from {
-      opacity: var(--twinkle-from-opacity, 0.25);
+      opacity: var(--twinkle-from-opacity);
     }
     to {
       opacity: 1;
