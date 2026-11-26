@@ -1,6 +1,6 @@
-import { random } from "https://cdn.skypack.dev/lodash";
+import { random } from 'https://cdn.skypack.dev/lodash';
 
-import { normalize, convertPolarToCartesian } from "./utils.js";
+import { normalize, convertPolarToCartesian } from './utils.js';
 
 const DISPERSE_DURATION = { min: 400, max: 800 };
 
@@ -19,42 +19,33 @@ const NUM_PARTICLES = 50;
 const JITTER = 10;
 
 /** @type {HTMLButtonElement} */
-const $likeButton = document.getElementById("likeButton");
+const $likeButton = document.getElementById('likeButton');
 
-$likeButton.addEventListener("click", function () {
-  const className = "like-button--liked";
+$likeButton.addEventListener('click', function () {
+  const className = 'like-button--liked';
 
-  $likeButton
-    .classList
-    .toggle(className);
+  $likeButton.classList.toggle(className);
 
-  const isLiked = $likeButton
-    .classList
-    .contains(className);
+  const isLiked = $likeButton.classList.contains(className);
 
   if (!isLiked) return;
 
   /** @type {Array<HTMLSpanElement>} */
   const $particles = [];
 
-  for (
-    let index = 0;
-    index < NUM_PARTICLES;
-    index += 1
-  ) {
-    const $particle = document.createElement("span");
+  for (let index = 0; index < NUM_PARTICLES; index += 1) {
+    const $particle = document.createElement('span');
 
-    $particle
-      .classList
-      .add("particle");
+    $particle.classList.add('particle');
 
-    const angle = normalize({
-      value: index,
-      currentScaleMin: 0,
-      currentScaleMax: NUM_PARTICLES,
-      newScaleMin: 0,
-      newScaleMax: 360,
-    }) + random(-JITTER, JITTER);
+    const angle =
+      normalize({
+        value: index,
+        currentScaleMin: 0,
+        currentScaleMax: NUM_PARTICLES,
+        newScaleMin: 0,
+        newScaleMax: 360,
+      }) + random(-JITTER, JITTER);
 
     const distance = random(DISTANCE.min, DISTANCE.max);
 
@@ -89,7 +80,7 @@ $likeButton.addEventListener("click", function () {
 
       toString() {
         return `hsl(${this.h} ${this.s} ${this.l})`;
-      }
+      },
     };
 
     const disperseDuration = normalize({
@@ -114,57 +105,40 @@ $likeButton.addEventListener("click", function () {
 
     const twinkleDuration = random(TWINKLE_DURATION.min, TWINKLE_DURATION.max);
 
-    $particle
-      .style
-      .setProperty("--x", `${x}px`);
+    $particle.style.setProperty('--x', `${x}px`);
 
-    $particle
-      .style
-      .setProperty("--y", `${y}px`);
+    $particle.style.setProperty('--y', `${y}px`);
 
-    $particle
-      .style
-      .setProperty("--spin", `${spin}deg`);
+    $particle.style.setProperty('--spin', `${spin}deg`);
 
-    $particle
-      .style
-      .setProperty("--scale", scale);
+    $particle.style.setProperty('--scale', scale);
 
-    $particle
-      .style
-      .setProperty("--particle-height", `${particleDimensions.height}px`);
+    $particle.style.setProperty(
+      '--particle-height',
+      `${particleDimensions.height}px`
+    );
 
-    $particle
-      .style
-      .setProperty("--particle-width", `${particleDimensions.width}px`);
+    $particle.style.setProperty(
+      '--particle-width',
+      `${particleDimensions.width}px`
+    );
 
-    $particle
-      .style
-      .setProperty("--particle-border-radius", `${particleDimensions.borderRadius}%`);
+    $particle.style.setProperty(
+      '--particle-border-radius',
+      `${particleDimensions.borderRadius}%`
+    );
 
-    $particle
-      .style
-      .setProperty("--particle-color", particleColorHsl);
+    $particle.style.setProperty('--particle-color', particleColorHsl);
 
-    $particle
-      .style
-      .setProperty("--disperse-duration", `${disperseDuration}ms`);
+    $particle.style.setProperty('--disperse-duration', `${disperseDuration}ms`);
 
-    $particle
-      .style
-      .setProperty("--fade-duration", `${fadeDuration}ms`);
+    $particle.style.setProperty('--fade-duration', `${fadeDuration}ms`);
 
-    $particle
-      .style
-      .setProperty('--fade-delay', `${fadeDelay}ms`);
+    $particle.style.setProperty('--fade-delay', `${fadeDelay}ms`);
 
-    $particle
-      .style
-      .setProperty("--twinkle-from-opacity", twinkleFromOpacity);
+    $particle.style.setProperty('--twinkle-from-opacity', twinkleFromOpacity);
 
-    $particle
-      .style
-      .setProperty("--twinkle-duration", `${twinkleDuration}ms`);
+    $particle.style.setProperty('--twinkle-duration', `${twinkleDuration}ms`);
 
     $particles.push($particle);
 
@@ -177,7 +151,7 @@ $likeButton.addEventListener("click", function () {
     FADE_DURATION.max +
     FADE_DELAY.max +
     100;
-  
+
   setTimeout(function () {
     $particles.forEach(($p) => $p.remove());
   }, cleanupDelay);
