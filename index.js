@@ -38,107 +38,131 @@ $likeButton.addEventListener('click', function () {
 
     $particle.classList.add('particle');
 
-    const angle =
-      normalize({
-        value: index,
-        currentScaleMin: 0,
-        currentScaleMax: NUM_PARTICLES,
-        newScaleMin: 0,
-        newScaleMax: 360,
-      }) + random(-JITTER, JITTER);
+    const distance = (function assignXY() {
+      const angle =
+        normalize({
+          value: index,
+          currentScaleMin: 0,
+          currentScaleMax: NUM_PARTICLES,
+          newScaleMin: 0,
+          newScaleMax: 360,
+        }) + random(-JITTER, JITTER);
 
-    const distance = random(DISTANCE.min, DISTANCE.max);
+      const distance = random(DISTANCE.min, DISTANCE.max);
 
-    const [x, y] = convertPolarToCartesian(angle, distance);
+      const [x, y] = convertPolarToCartesian(angle, distance);
 
-    const spin = normalize({
-      value: distance,
-      currentScaleMin: DISTANCE.min,
-      currentScaleMax: DISTANCE.max,
-      newScaleMin: 400,
-      newScaleMax: 800,
-    });
+      $particle.style.setProperty('--x', `${x}px`);
 
-    const scale = normalize({
-      value: distance,
-      currentScaleMin: DISTANCE.min,
-      currentScaleMax: DISTANCE.max,
-      newScaleMin: 1,
-      newScaleMax: 2,
-    });
+      $particle.style.setProperty('--y', `${y}px`);
 
-    const particleDimensions = {
-      height: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
-      width: random(PARTICLE_SIZE.min, PARTICLE_SIZE.max),
-      borderRadius: random(5, 25),
-    };
+      return distance;
+    })();
 
-    const particleColorHsl = {
-      h: random(0, 360),
-      s: random(50, 100),
-      l: random(50, 90),
+    (function assignSpin() {
+      const spin = normalize({
+        value: distance,
+        currentScaleMin: DISTANCE.min,
+        currentScaleMax: DISTANCE.max,
+        newScaleMin: 400,
+        newScaleMax: 800,
+      });
 
-      toString() {
-        return `hsl(${this.h} ${this.s} ${this.l})`;
-      },
-    };
+      $particle.style.setProperty('--spin', `${spin}deg`);
+    })();
 
-    const disperseDuration = normalize({
-      value: distance,
-      currentScaleMin: DISTANCE.min,
-      currentScaleMax: DISTANCE.max,
-      newScaleMin: DISPERSE_DURATION.min,
-      newScaleMax: DISPERSE_DURATION.max,
-    });
+    (function assignScale() {
+      const scale = normalize({
+        value: distance,
+        currentScaleMin: DISTANCE.min,
+        currentScaleMax: DISTANCE.max,
+        newScaleMin: 1,
+        newScaleMax: 2,
+      });
 
-    const fadeDuration = normalize({
-      value: distance,
-      currentScaleMin: DISTANCE.min,
-      currentScaleMax: DISTANCE.max,
-      newScaleMin: FADE_DURATION.min,
-      newScaleMax: FADE_DURATION.max,
-    });
+      $particle.style.setProperty('--scale', scale);
+    })();
 
-    const fadeDelay = random(FADE_DELAY.min, FADE_DELAY.max);
+    (function assignHeight() {
+      const height = random(PARTICLE_SIZE.min, PARTICLE_SIZE.max);
 
-    const twinkleFromOpacity = random(0.25, 1, true);
+      $particle.style.setProperty('--particle-height', `${height}px`);
+    })();
 
-    const twinkleDuration = random(TWINKLE_DURATION.min, TWINKLE_DURATION.max);
+    (function assignWidth() {
+      const width = random(PARTICLE_SIZE.min, PARTICLE_SIZE.max);
 
-    $particle.style.setProperty('--x', `${x}px`);
+      $particle.style.setProperty('--particle-width', `${width}px`);
+    })();
 
-    $particle.style.setProperty('--y', `${y}px`);
+    (function assignBorderRadius() {
+      const borderRadius = random(5, 25);
 
-    $particle.style.setProperty('--spin', `${spin}deg`);
+      $particle.style.setProperty(
+        '--particle-border-radius',
+        `${borderRadius}%`
+      );
+    })();
 
-    $particle.style.setProperty('--scale', scale);
+    (function assignColor() {
+      const h = random(0, 360);
 
-    $particle.style.setProperty(
-      '--particle-height',
-      `${particleDimensions.height}px`
-    );
+      const s = random(50, 100);
 
-    $particle.style.setProperty(
-      '--particle-width',
-      `${particleDimensions.width}px`
-    );
+      const l = random(50, 90);
 
-    $particle.style.setProperty(
-      '--particle-border-radius',
-      `${particleDimensions.borderRadius}%`
-    );
+      const color = `hsl(${h} ${s} ${l})`;
 
-    $particle.style.setProperty('--particle-color', particleColorHsl);
+      $particle.style.setProperty('--particle-color', color);
+    })();
 
-    $particle.style.setProperty('--disperse-duration', `${disperseDuration}ms`);
+    (function assignDisperseDuration() {
+      const disperseDuration = normalize({
+        value: distance,
+        currentScaleMin: DISTANCE.min,
+        currentScaleMax: DISTANCE.max,
+        newScaleMin: DISPERSE_DURATION.min,
+        newScaleMax: DISPERSE_DURATION.max,
+      });
 
-    $particle.style.setProperty('--fade-duration', `${fadeDuration}ms`);
+      $particle.style.setProperty(
+        '--disperse-duration',
+        `${disperseDuration}ms`
+      );
+    })();
 
-    $particle.style.setProperty('--fade-delay', `${fadeDelay}ms`);
+    (function assignFadeDuration() {
+      const fadeDuration = normalize({
+        value: distance,
+        currentScaleMin: DISTANCE.min,
+        currentScaleMax: DISTANCE.max,
+        newScaleMin: FADE_DURATION.min,
+        newScaleMax: FADE_DURATION.max,
+      });
 
-    $particle.style.setProperty('--twinkle-from-opacity', twinkleFromOpacity);
+      $particle.style.setProperty('--fade-duration', `${fadeDuration}ms`);
+    })();
 
-    $particle.style.setProperty('--twinkle-duration', `${twinkleDuration}ms`);
+    (function assignFadeDelay() {
+      const fadeDelay = random(FADE_DELAY.min, FADE_DELAY.max);
+
+      $particle.style.setProperty('--fade-delay', `${fadeDelay}ms`);
+    })();
+
+    (function assignTwinkleFromOpacity() {
+      const twinkleFromOpacity = random(0.25, 1, true);
+
+      $particle.style.setProperty('--twinkle-from-opacity', twinkleFromOpacity);
+    })();
+
+    (function assignTwinkleDuration() {
+      const twinkleDuration = random(
+        TWINKLE_DURATION.min,
+        TWINKLE_DURATION.max
+      );
+
+      $particle.style.setProperty('--twinkle-duration', `${twinkleDuration}ms`);
+    })();
 
     $particles.push($particle);
 
