@@ -1,5 +1,4 @@
-import { random } from 'https://cdn.skypack.dev/lodash';
-import { normalize, convertPolarToCartesian } from './utils.js';
+import { random, normalize, convertPolarToCartesian } from './utils.js';
 
 const NUM_PARTICLES = 50;
 
