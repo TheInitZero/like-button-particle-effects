@@ -1,4 +1,28 @@
 /**
+ * @param {number} min
+ * @param {number} max
+ * @param {boolean} [shouldReturnFloat=false]
+ * @returns {number}
+ */
+export function random(min, max, shouldReturnFloat = false) {
+  if (min > max) {
+    throw new Error(
+      `max should be greater than or equal to min. Given max: ${max}, min: ${min}`
+    );
+  }
+
+  if (min == max) return min;
+  const diff = max - min;
+  const addition = diff * Math.random();
+  const result = min + addition;
+  if (shouldReturnFloat) {
+    // Round upto 2 decimal places
+    return Math.round(result * 100) / 100;
+  }
+  return Math.round(result);
+}
+
+/**
  * @param {number} value
  * @param {number} currentScaleMin
  * @param {number} currentScaleMax
