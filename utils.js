@@ -1,23 +1,18 @@
 /**
- * @typedef {Object} NormalizeParams
- * @property {number} value
- * @property {number} currentScaleMin
- * @property {number} currentScaleMax
- * @property {number} newScaleMin
- * @property {number} newScaleMax
- */
-
-/**
- * @param {NormalizeParams} params
+ * @param {number} value
+ * @param {number} currentScaleMin
+ * @param {number} currentScaleMax
+ * @param {number} newScaleMin
+ * @param {number} newScaleMax
  * @returns {number} Interpolated value
  */
-export function normalize({
+export function normalize(
   value,
   currentScaleMin,
   currentScaleMax,
   newScaleMin = 0,
-  newScaleMax = 1,
-}) {
+  newScaleMax = 1
+) {
   const standardNormalization =
     (value - currentScaleMin) / (currentScaleMax - currentScaleMin);
 

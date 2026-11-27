@@ -21,13 +21,7 @@ $likeButton.addEventListener('click', function () {
 
     const { distance, minDistance, maxDistance } = (function assignXY() {
       const angle =
-        normalize({
-          value: index,
-          currentScaleMin: 0,
-          currentScaleMax: NUM_PARTICLES,
-          newScaleMin: 0,
-          newScaleMax: 360,
-        }) + random(-10, 10);
+        normalize(index, 0, NUM_PARTICLES, 0, 360) + random(-10, 10);
 
       const min = 40;
       const max = 80;
@@ -41,30 +35,14 @@ $likeButton.addEventListener('click', function () {
     (function assignSpin() {
       const min = 400;
       const max = 800;
-
-      const spin = normalize({
-        value: distance,
-        currentScaleMin: minDistance,
-        currentScaleMax: maxDistance,
-        newScaleMin: min,
-        newScaleMax: max,
-      });
-
+      const spin = normalize(distance, minDistance, maxDistance, min, max);
       $particle.style.setProperty('--spin', `${spin}deg`);
     })();
 
     (function assignScale() {
       const min = 1;
       const max = 2;
-
-      const scale = normalize({
-        value: distance,
-        currentScaleMin: minDistance,
-        currentScaleMax: maxDistance,
-        newScaleMin: min,
-        newScaleMax: max,
-      });
-
+      const scale = normalize(distance, minDistance, maxDistance, min, max);
       $particle.style.setProperty('--scale', scale);
     })();
 
@@ -105,13 +83,13 @@ $likeButton.addEventListener('click', function () {
       const min = 400;
       const max = 800;
 
-      const disperseDuration = normalize({
-        value: distance,
-        currentScaleMin: minDistance,
-        currentScaleMax: maxDistance,
-        newScaleMin: min,
-        newScaleMax: max,
-      });
+      const disperseDuration = normalize(
+        distance,
+        minDistance,
+        maxDistance,
+        min,
+        max
+      );
 
       $particle.style.setProperty(
         '--disperse-duration',
@@ -123,13 +101,13 @@ $likeButton.addEventListener('click', function () {
       const min = 1000 - 500;
       const max = 1000 + 500;
 
-      const fadeDuration = normalize({
-        value: distance,
-        currentScaleMin: minDistance,
-        currentScaleMax: maxDistance,
-        newScaleMin: min,
-        newScaleMax: max,
-      });
+      const fadeDuration = normalize(
+        distance,
+        minDistance,
+        maxDistance,
+        min,
+        max
+      );
 
       $particle.style.setProperty('--fade-duration', `${fadeDuration}ms`);
     })();
