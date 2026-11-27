@@ -31,11 +31,8 @@ export function normalize({
  */
 export function convertPolarToCartesian(angle, distance) {
   const angleInRadians = convertDegreesToRadians(angle);
-
   const x = Math.cos(angleInRadians) * distance;
-
   const y = Math.sin(angleInRadians) * distance;
-
   return [x, y];
 }
 
