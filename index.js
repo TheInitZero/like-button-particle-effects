@@ -1,9 +1,20 @@
 import { random, normalize, convertPolarToCartesian } from './utils.js';
 
 const NUM_PARTICLES = 50;
+const POP_CIRCLE_DURATION = 150;
 
 /** @type {HTMLButtonElement} */
 const $likeButton = document.getElementById('likeButton');
+
+(function assignPopCircleDuration() {
+  /** @type {HTMLSpanElement} */
+  const $popCircle = document.getElementById('popCircle');
+
+  $popCircle.style.setProperty(
+    '--pop-circle-duration',
+    `${POP_CIRCLE_DURATION}ms`
+  );
+})();
 
 $likeButton.addEventListener('click', function () {
   const className = 'like-button--liked';
@@ -133,8 +144,13 @@ $likeButton.addEventListener('click', function () {
     })();
 
     $particles.push($particle);
-    $likeButton.append($particle);
   }
+
+  setTimeout(function () {
+    $particles.forEach(function ($p) {
+      $likeButton.append($p);
+    });
+  }, POP_CIRCLE_DURATION);
 
   setTimeout(function () {
     $particles.forEach(($p) => $p.remove());
