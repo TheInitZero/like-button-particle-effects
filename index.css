@@ -32,6 +32,23 @@
     transition-duration: 150ms;
   }
 
+  .like-button--liked .like-button__pop-circle {
+    --color-shift-from: hsl(0 95 50);
+
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: hsl(270 100 80);
+    opacity: 0;
+    animation:
+      scaleFromShrunken var(--pop-circle-duration),
+      colorShift var(--pop-circle-duration),
+      fadeFromOpaque 300ms var(--pop-circle-duration) backwards;
+  }
+
   .like-button__icon {
     --stroke-transition-duration: 450ms;
     --fill-transition-duration: 450ms;
@@ -52,9 +69,28 @@
   .like-button--liked .like-button__icon {
     --stroke-transition-duration: 150ms;
     --fill-transition-duration: 150ms;
+    --scale-tween: linear(
+      0,
+      0.04 1.1%,
+      0.156 2.3%,
+      1.015 8.5%,
+      1.157 10.4%,
+      1.217 12.4%,
+      1.217 13.6%,
+      1.193 15%,
+      0.992 21.7%,
+      0.964 23.5%,
+      0.952 25.3%,
+      0.957 27.9%,
+      1.002 34.7%,
+      1.01 38.2%,
+      0.998 51%,
+      1
+    );
 
     stroke: hsl(0 95 75);
     fill: hsl(0 95 50);
+    animation: scaleFromShrunken 2s var(--scale-tween);
   }
 
   .particle {
@@ -91,6 +127,12 @@
       opacity: 1;
     }
   }
+
+  @keyframes colorShift {
+    from {
+      background-color: var(--color-shift-from);
+    }
+  }
 }
 
 @layer utility {
@@ -106,6 +148,18 @@
   @keyframes fadeToTransparent {
     to {
       opacity: 0;
+    }
+  }
+
+  @keyframes scaleFromShrunken {
+    from {
+      transform: scale(0);
+    }
+  }
+
+  @keyframes fadeFromOpaque {
+    from {
+      opacity: 1;
     }
   }
 }
